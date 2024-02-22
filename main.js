@@ -1,6 +1,6 @@
 "use strict";
 
-const players = [{name: "newt", turnPosition: null }, {name: "ripley", turnPosition: null}, {name: "apone", turnPosition: null}, {name: "hicks", turnPosition: null}];
+let players = [{name: "newt", turnPosition: null }, {name: "ripley", turnPosition: null}, {name: "apone", turnPosition: null}, {name: "hicks", turnPosition: null}];
 
 let turnOrder = []
 
@@ -72,3 +72,31 @@ function renderTurnOrder () {
 }
 // Add event listener so it's clickable
 btn.addEventListener("click", renderTurnOrder)
+
+// Add new player Feature
+const addBtn = document.querySelector('#add-player-btn');
+
+const addPlayer = (object) => {
+  if(!players.some(player => player.name === object.name))
+  {
+  playerList.innerHTML += createPlayerCard(object);
+  players.push(object);
+  }
+  else
+  {
+    createPlayerObject();
+  }
+}
+
+const randomNames = ["Elena", "Liam", "Sophia", "Noah", "Ava", "Oliver", "Emma", "Ethan", "Isabella", "Mason", "Mia", "Lucas", "Charlotte", "Logan", "Amelia", "Jackson", "Harper", "Austin", "Evelyn", "Jack", "Abigail", "Owen", "Emily", "Benjamin", "Elizabeth", "William", "Selena", "James", "Avery"]
+
+const createPlayerObject = () => {
+ 
+  const randomIndex = Math.floor(Math.random() * randomNames.length);
+  const object = {name:randomNames[randomIndex], turnPosition: null};
+  
+  addPlayer(object);
+  
+}
+
+addBtn.addEventListener('click', createPlayerObject)
